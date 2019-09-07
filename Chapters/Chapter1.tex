@@ -1,38 +1,548 @@
 \chapter{Part One}
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus at pulvinar nisi. Phasellus hendrerit, diam placerat interdum iaculis, mauris justo cursus risus, in viverra purus eros at ligula. Ut metus justo, consequat a tristique posuere, laoreet nec nibh. Etiam et scelerisque mauris. Phasellus vel massa magna. Ut non neque id tortor pharetra bibendum vitae sit amet nisi. Duis nec quam quam, sed euismod justo. Pellentesque eu tellus vitae ante tempus malesuada. Nunc accumsan, quam in congue consequat, lectus lectus dapibus erat, id aliquet urna neque at massa. Nulla facilisi. Morbi ullamcorper eleifend posuere. Donec libero leo, faucibus nec bibendum at, mattis et urna. Proin consectetur, nunc ut imperdiet lobortis, magna neque tincidunt lectus, id iaculis nisi justo id nibh. Pellentesque vel sem in erat vulputate faucibus molestie ut lorem.
+Can we improve remote teleoperation interfaces with real-time 3D reconstruction?
 
 \section{Introduction}
 
 Quisque tristique urna in lorem laoreet at laoreet quam congue. Donec dolor turpis, blandit non imperdiet aliquet, blandit et felis. In lorem nisi, pretium sit amet vestibulum sed, tempus et sem. Proin non ante turpis. Nulla imperdiet fringilla convallis. Vivamus vel bibendum nisl. Pellentesque justo lectus, molestie vel luctus sed, lobortis in libero. Nulla facilisi. Aliquam erat volutpat. Suspendisse vitae nunc nunc. Sed aliquet est suscipit sapien rhoncus non adipiscing nibh consequat. Aliquam metus urna, faucibus eu vulputate non, luctus eu justo.
 
 
+\section{Objective}
+
+The necessity to build a teleoperated robot is the desire to send robots in hostile, unpleasant or for human inaccessible environments and perform dangerous or tedious tasks with the robot. However,The remote environment is highly dynamic, unstructured, and partially unknown, which creates issues related to remote mobility and manipulation.The majority works in the current research focus on providing video feed-backs in monocular and a stereoscopic 360 videos. which only allow operators to look in a fixed direction.
+
+Can we improve remote teleoperation interfaces by providing 3d reconstructed environment in real-time?
+
+My research was and will focus on improving the perception of remote environments in remote robotic teleoperation, using immersive 3DUIs for display and interaction based on the following \textbf{three} main aspects.
+
+
+\subsection*{Risk prevention} 
+Sensors can detect risky situations for humans such as obstacles, collisions, dangerous areas (fire, gas, etc.), and safe / unsafe terrains. Well-designed interfaces can provide timely sensor feedback and allow humans to perceive the risk before it occurs to be able to avoid it.
+
+%To indicate how the terrain is in front of a navigating robot (safe/ unsafe trains).
+%To detect and prevent from a collision.
+%To find out dangerous areas (fire, gas, etc.) and alert the operator.\\
+
+\subsection*{Task and motion planning}
+Task and motion planning requires an operator to perceive the environment, decide how to navigate a region, manipulate objects, etc., before the actual task is performed. The operator requires information on the robot kinematics and capabilities in the remote environment. Interactive interfaces can provide information to the operator in the planning phase, with respect to the possible approaches for executing the tasks.
+
+For instance, the following three tasks can be supported by assistive information for the operator.
+\begin{itemize}
+    \item To find a trade-off for look-ahead possibilities.
+    \item To plan the best navigation/optimal trajectory.
+    \item To find the best optimal grasping/manipulation points.
+\end{itemize}
+
+\subsection*{Human factors} 
+The learning capabilities and the performance of a human operator is limited by the amount of information they can remember and process \cite{NAP25118}. Limitations such as perception, cognition, and physical ergonomics can be supported by designing immersive interfaces \cite{Bowman:2004:UIT:993837}.\\
+To support and guide this study, the following questions will be considered, among others.
+\begin{itemize}
+    \item How to present information without confusion?
+    \item How to find a balance in showing information and for how long to show it?
+    \item How to represent the multi-dimensional information (environmental sensors, point-clouds, camera streams, etc.) effectively and efficiently?
+    \item How operators perceive different information?
+    \item What are the perceptual and cognitive constraints in remote teleoperation?
+    \item How to integrate different sensory information in an ergonomic and user-friendly manner, while utilizing human cognitive capabilities?
+\end{itemize} 
+
 \section{State of the Art}
 
-Phasellus nisi quam, volutpat non ullamcorper eget, congue fringilla leo. Cras et erat et nibh placerat commodo id ornare est. Nulla facilisi. Aenean pulvinar scelerisque eros eget interdum. Nunc pulvinar magna ut felis varius in hendrerit dolor accumsan. Nunc pellentesque magna quis magna bibendum non laoreet erat tincidunt. Nulla facilisi.
+%\section {Factors That Affect Remote Teleoperation}
+%the General procedures should be what progress in those two months ?
+%why this specific literature review needed?
+%What I understood ?
+%How can we use it ? 
+%What limitations are there ?
+A teleoperated robot allows an operator to perform complex tasks while receiving feedbacks, although operating a remotely located robot can be a challenging task because of the distance between the robot and operator.
+This physical detachment creates issues related to teleoperation: especially concentrating on remote perception and navigation. An ideal teleoperation system can create a man-machine interface of such high fidelity that the human operator could not detect that he was remotely located from the task.
 
-Duis eget massa sem, gravida interdum ipsum. Nulla nunc nisl, hendrerit sit amet commodo vel, varius id tellus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc ac dolor est. Suspendisse ultrices tincidunt metus eget accumsan. Nullam facilisis, justo vitae convallis sollicitudin, eros augue malesuada metus, nec sagittis diam nibh ut sapien. Duis blandit lectus vitae lorem aliquam nec euismod nisi volutpat. Vestibulum ornare dictum tortor, at faucibus justo tempor non. Nulla facilisi. Cras non massa nunc, eget euismod purus. Nunc metus ipsum, euismod a consectetur vel, hendrerit nec nunc.
+The main objective for designing such systems are robustness, a feeling of presence, task performance, and transparency. Ideally, these objectives are simultaneously optimized without risking the stability of the closed-loop system. For this purpose, system specific parameters such as the type of master and slave device, sensor and actuator deficiencies, quantization effects, as well as a time delay or packet loss in the communication channel have to be considered in the controller design. For realizing a high-quality teleoperation system, further improvements can be achieved when additionally taking into account information about the human operator, the remote environment, as well as the actual task to be performed \cite{passenberg2010survey}.
+
+I divided my literature review into three parts (factors that affect remote teleportation, Augmented Reality Interface for Teleoperation and  Real-time 3D Reconstruction and Teleoperation ) based on the following points research questions.
+
+\begin{itemize}
+    \item What are the main factors (constraints) that affect teleoperation interface design (human factors)?
+    \item How to design low-latency streaming of sensory information (3D data, point-clouds, mesh, and video) from the remote environment?
+    \item How to effectively capture 3D information?
+    \item How to convert noisy measurements into high-quality representation?
+    \item How best to utilize Augmented Reality / Real-time 3D reconstruction for assistance in teleoperation?
+    \item How to represent sensor information without causing user discomfort?
+    \item How to maximize the operator performance?
+    \item How to design and analyse user studies following standard psycho-physics methods?
+\end{itemize}
+
+
+\subsection{Factors that affect remote teleportation}
+
+The first part of the literature review discuss how the human operator process information and what are the different factors that affect remote teleportation: especially related to a field of view (FOV), limited depth perception, network latency and as such.
+
+\underline{Human factors:} Bowman et.al  \cite{Bowman:2004:UIT:993837} refers the term human factors as the capabilities; characteristics; limitations of the human user; and includes considerations related to the body (acting), the sense(perceiving), and the brain(thinking).
+
+A Basic knowledge of how users process information into useful (inter)action is very valuable to understand the human factors and it is called information processing \cite{Bowman:2004:UIT:993837}. Information processing has been studied for many years and different studies have different models. Bowman et al. \cite{Bowman:2004:UIT:993837} adapted a high level staged information processing model from \cite{PMID:11540969} by mapping it into the three main factors: perception, cognition, and physical ergonomics figure \ref{Info Processing}.
+
+According to Bowman et al. \cite{Bowman:2004:UIT:993837} model, a stimuli or events which are perceived will be provided with a meaningful interpretation based on memories of past experiences. In response to what is perceived, actions may get selected, executed or information may get stored in working memory,(short-term memory).
+
+\begin{figure}
+     \includegraphics[width=1\textwidth]{images/Info_proc.png}
+    \caption{Information processing and related human factors adapted from \cite{PMID:11540969}}
+    \centering
+    \label{Info Processing}
+\end{figure}
+
+
+\underline { Attention Resources :} Attention can be seen as a selection process and it could be used to draw attention to specific information from the dynamic spatio-temporal environment.
+
+Attention process is prone to errors, which can be raised by certain bottlenecks, which leads to an inability to notice visual (change blindness) and audition changes ( ‘change blindness’ refers to the surprising difficulty observers have in noticing large changes to visual scenes \cite{SIMONS200516}). Similarly, errors occur on a temporal basis, especially when rapid sequences of stimuli occur.
+
+\underline {Short and long term memories:} 
+Working memory has a limited capacity and attention resources highly influence it. in contrast, the capacity of our long-term memory is vast; storing information about our world, concepts, and procedures while not being directly affected by attention \cite{Bowman:2004:UIT:993837}.
+
+\underline {Field of View :} 
+Cameras with limited angular view create the so-called "Keyhole" effect (a sense of trying to understand the environment with its narrow "Soda Straw" field of view). major consequences of this effect include missing new events, increased difficulty in navigating novel environments, gaps or incoherent models of the explored space \cite{woods2004envisioning}.
+
+\underline {Orientation and Attitude of the robot:} 
+When the remote environments become more complex and cues to a robot’s pose become sparser: it becomes easy for a teleoperator using an egocentric (camera) display to lose situational awareness. To successfully navigate locally and Globally to know where the object of interest is, The operator needs to know the robot's attitude (i.e., pitch and roll) to avoid roll-over accidents \cite{wang2004gravity}.
+
+\underline{Orientation in the Remote Environment:} Navigation with a traditional (north-up) map can be challenging at times because of the demand of mental rotation. track-up (ego-referenced; rotating viewpoints) maps consistently show that track-up maps are better for local guidance (i.e., navigation) and north-up maps are better for global awareness \cite{wang2004gravity}.
+
+\underline{Attitude of the robot:} Attitude (i.e., pitch and roll) of a robotic vehicle may be easy to reference when there are other familiar objects (e.g., horizon, buildings, trees, etc.) in the remote environment. However, if those reference points are absent and the onboard cameras are fixed, operators sometimes find it surprisingly hard to accurately assess the attitude of their robotic vehicles \cite{wang2004gravity}.
+
+\underline{Multiple camera and View point:}
+The capabilities to see the robot and its local environment gives the operator a better sense of the robot’s location with respect to obstacles, victims, or other potential difficulties \cite{keyes2006camera}. However, the difference in eye point and camera viewpoint could create motion sickness.In addition, when handling multiple robots, it can be challenging for the operator to acquire different contexts rapidly when switching among robots: information in one scene may not be encoded sufficiently to be compared/integrated when accessed subsequently ( change blindness).
+
+\underline{Degraded Depth Perception :}
+Degraded depth perception affects the teleoperator’s estimates of distance and size and can have profound effects on mission effectiveness. In the case of monocular cameras, the operators have to rely on other cues: such as shadows, linear perspective and size consistency.
+
+The effect of degraded depth perception has a higher impact when working in unfamiliar and difficult terrain due to lack of apparent size. In addition, remote manipulation that involves ballistic movement, recognition of unfamiliar scenes, analysis of three-dimensionally complex scenes and the accurate placement of manipulators or tools within such scenes \cite{drascic1993investigation}.
+
+\underline{Degraded Video Image and Time delay :}
+Degraded video feeds could leave out essential visual cues for building teleoperators mental models of the remote environment. Different factors such as low bandwidth, low frame rate, low resolution and the number of bits per pixel can create degraded video feeds.
+
+\underline{Motion :}
+Teleoperation can be difficult and distracting because of the moving platform vibration.which makes viewing the visual displays and manual control/input more challenging \cite{schipani1998quantification}.
+
+\begin{longtable}{p{2.5cm} p{5cm} p{5cm} p{1cm}}
+    \hline
+      \textbf{Factor} & \textbf{Effects} & \textbf{Suggested solution} & \textbf{Ref.\#}\\
+            \hline
+            \rowcolor{lightgray} 
+           Short and long term memories &
+           \begin{enumerate}[noitemsep,nolistsep]
+                \item Working memory has a limited capacity.
+                \item Long term memory has a slower recall. 
+           \end{enumerate} &
+           \begin{enumerate}[noitemsep,nolistsep]
+           \item Minimize the need for a mighty memory.
+           \item Present information in an organized way.
+           \item Place all information in close physical proximity.
+           \item give the operator control over the information.
+           \end{enumerate}
+             & 
+            \cite{Bowman:2004:UIT:993837}\\
+        \hline
+          
+                Attention resources &
+                \begin{enumerate}[noitemsep,nolistsep]
+                    \item Working memory is highly affected by attention resources.
+                    \item Is prone to errors, which can lead to an inability to notice visual and audition changes.
+                \end{enumerate} &
+                \begin{enumerate}[noitemsep,nolistsep]
+                \item Don't litter the side of the interface with destructible materials.
+                \item Focus the operators’ attention on important elements.
+                \end{enumerate} &
+                \cite{SIMONS200516} \cite{Bowman:2004:UIT:993837} \cite{PMID:11540969}\\
+                
+                \hline
+     \rowcolor{lightgray}
+       Decision-Making &
+           \begin{enumerate}[noitemsep,nolistsep]
+           \item The speed of decision-making processes varies widely, and is affected by conflicts, complexity, or uncertainty of either the information being processed or the detection of the possible outcome.
+           
+           \end{enumerate} &
+            \begin{enumerate}[noitemsep,nolistsep]
+            \item Behaviour can be adjusted by emotional state and conditioning.
+            \item  Skills allow users to make more accurate and quicker responses.
+            \end{enumerate} &  \cite{pavlov1927conditional} \cite{Bowman:2004:UIT:993837} \cite{fitts1967human} \\
+            
+    \caption{Summery of Human factors}
+    \label{table:human factors}
+    \end{longtable}
+
+ \begin{longtable}{p{2.5cm} p{5cm} p{5cm} p{1cm}}
+    \hline
+      \textbf{Factor} & \textbf{Effects} & \textbf{Suggested solution} & \textbf{Ref.\#}\\           
+            
+        \hline 
+        Field of View  &
+           \begin{enumerate}[noitemsep,nolistsep]
+           \item Restricted FOV affects  target detection and identification.
+           \item Distance cues may be lost and depth perception may be degraded.
+           \item Degraded remote driving.
+           \item Increased difficulty in navigating novel environments.
+           \end{enumerate} &
+            \begin{enumerate}[noitemsep,nolistsep]
+            \item Wider FOV (changeable FOV ) can be used. 
+            \item Stereoscopic 3D displays.
+            \item Multiple cameras and single cameras with special optics.
+            \end{enumerate} &  \cite{Chen2014} \cite{smyth2000indirect} \cite{van2003image} \cite{Chen2007HumanPI} \cite{Suzuki2014} \\
+        \hline
+          
+     \rowcolor{lightgray} Orientation and Attitude of the Robot &
+           \begin{enumerate}[noitemsep,nolistsep]
+           \item Difficulty knowing the robot orientation in the environment.
+           \item North up and tracked-up map.
+           \item Mismatch between actual and perceived attitude of robot.
+           \item Unawareness of robot's inclination and shape.
+           \end{enumerate} &
+            \begin{enumerate}[noitemsep,nolistsep]
+            \item Track-up map for navigation.
+            \item North-up map for tasks involving integration of spatial relations in the environment.
+            \item Gravity referenced view.
+            \end{enumerate} &  \cite{wang2004gravity} \cite{Chen2007HumanPI} \cite{fitts1967human} \cite{drury2006changing}\\
+        \hline
+         Multiple camera  and View point &
+           \begin{enumerate}[noitemsep,nolistsep]
+           \item Attention switching and change blindness.
+           \item Motion sickness.
+           \item Egocentric: cognitive tunneling.
+           \item Exocentric: loss of immediacy and true ground view.
+           
+           \end{enumerate} &
+            \begin{enumerate}[noitemsep,nolistsep]
+            \item Auditory alerts.
+            \item Multi-modal solutions.
+            \item Peripheral cues for egocentric.
+            \end{enumerate} &  \cite{keyes2006camera} \cite{Chen2007HumanPI} \cite{olmos2000tactical} \cite{keyes2006camera} \cite{Chen2007HumanPI} \cite{olmos2000tactical}\\
+        \hline
+
+        \rowcolor{lightgray} Depth perception &
+           \begin{enumerate}[noitemsep,nolistsep]
+           \item Underestimation of distance and size.
+           \item Degraded navigation, driving, and telemanipulation.
+           \end{enumerate} &
+            \begin{enumerate}[noitemsep,nolistsep]
+            \item Sterioscopic displayes (SDs).
+            \item Inter-camera distance should be less than inter-ocular distance.
+            \end{enumerate} &  \cite{Bowman:2004:UIT:993837} \cite{fitts1967human} \cite{Chen2007HumanPI}\\
+        \hline 
+        
+        Video frame rate and Time delay.
+         &
+           \begin{enumerate}[noitemsep,nolistsep]
+           \item Degraded motion perception and spatial orientation.
+           \item Degraded target identification and latency.
+           \item Motion sickness.
+           \item Over actuation when delay is variable.
+           \end{enumerate} &
+            \begin{enumerate}[noitemsep,nolistsep]
+           \item Utilize the human cognitive processing speed which is around 170 ms (range: $75-370$ ms).
+            \item Augmented reality/ overlaying information.
+            \item Predictive Display (simulation in VR/AR).
+            \item Robust adaptive algorithm.
+            \end{enumerate} &  \cite{madl2011timing} \cite{Chen2007HumanPI} \cite{kebria2019robust} \\
+      
+        \hline
+      \rowcolor{lightgray} Motion &
+           \begin{enumerate}[noitemsep,nolistsep]
+           \item Degradation on accuracy and latency.
+           \item Motion sickness.
+           \end{enumerate} &
+            \begin{enumerate}[noitemsep,nolistsep]
+            \item Multi modal user interface.
+            \item Tailor interface to vibratory and motion effects.
+            \end{enumerate} &  \cite{kamsickas2003future} \cite{schipani1998quantification}\\
+        \hline
+
+\caption{Summery of different factors}
+\label{table:tasks}
+\end{longtable}
+
+\subsection{Augmented Reality Interface for Teleoperation}
+This summery is about my literature review and experiment setups regarding different ways of providing informations using Augmented reality interfaces.
+
+\subsection*{Systematic Literature Review}
+My initial objective for this year was to study the state-of-the-art to understand the existing literature in perception interfaces related to teleoperation, 3DUI design, AR etc. This systematic litrature review is part of this objective.
+
+\textbf{Method of research}
+
+To understand in better I have been doing a systematic literature review on Augmented reality interfaces for Teleoperation. To add a depth and guide the study, the following four research questions have been defined.
+
+\begin{itemize}
+    \item what are the most suitable immersive interfaces for teleoperation ?
+    \item What are the range of applications of AR in Teleoperation ?
+    \item How situational awareness is achieved in teleoperation using AR interfaces ?
+    \item What are the different challenges of Augmented Reality in Teleoperation ?
+\end{itemize}
+
+Papers were identified by means of a structured keyword search on the following major databases and publisher websites.
+
+\begin{itemize}
+    \item IEEE Xplore (http://ieeexplore.ieee.org/)
+    \item Scopus (www.scopus.com).
+    \item ScienceDirect (https://www.sciencedirect.com/)
+    \item ACM (https://dl.acm.org)
+\end{itemize}\\
+
+Keywords such as \textbf{Teleoperation; telepresence; Augmented Reality;Mixed Reality; teleoperator ; telerobotics} were combined as such.
+\begin{itemize}
+    \item "Teleoperation " AND ("Augmented Reality" OR "Mixed Reality").
+    \item ("Teleoperation" OR "Teleoperator") AND ("Augmented Reality" OR "Mixed Reality").
+    \item ("Teleoperation" OR "Telerobotics") AND ("Augmented Reality" OR "Mixed Reality").
+\end{itemize}
+
+However, In order to align the research papers with the research aims inclusion and exclusion criteria  defined by language(only articles in English) and restriction by primary articles (excluding secondary studies such as other systematic reviews, area mapping and surveys).
+
+\textbf{Samples and descriptive analysis}
+
+The over all sample papers considered in this study are 508 (IEEE=96, ACM=101, Scopus=211, Sciencedirect=100):before applying the exclusion criteria) and 139 research papers after applying the exclusion criteria Table \ref{table:papers}.
+
+The time distribution of the papers published is shown in figure \ref{fig:distribution}.
+
+A small growth can be seen between 1993 and 2009 in the number of papers, however, slight growth appeared on 2013 with gradual changes to the current years, rationalizes the rise of the importance of the topic of Augmented reality for Teleoperation in recent years.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\textwidth]{images/Selected_papers.png}
+    \caption{Number of Selected papers}
+    \label{fig:PapersNumber}
+\end{figure}
+
+
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\textwidth]{images/Count_of_publication_Year.png}
+    \caption{Time distribution of the publications over the years}
+    \label{fig:distribution}
+\end{figure}
+
+To characterise the papers, a bibliometric analysis of these initial 508 research papers and the final set 139 research papers was performed by using VOSviewer software and it reveals the most frequent keywords. To obtain more information about these keywords, a colour-coded graph of their density was produced \ref{fig:final Density}. The colour distribution is between blue and red. The greater the number of items near a point and the greater the weight of neighbouring items, the closer the keyword is to red. On the contrary, the smaller the number of items in the neighbourhood of a point and the smaller the weights of neighbouring items, the closer the keyword is to blue.keywords such as 'Augmented Reality','Teleoperation','Telerobotics','Navigation','Mixed Reality' and 'Telepresence' appeared with the greatest density.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.7\textwidth]{images/Density_3.png}
+    \caption{Mapping of the most frequent keywords of the final set of research papers}
+    \label{fig:final Density}
+\end{figure}
+
+
+\textbf{Analysis of papers}
+ To investigate the range of applications of AR in Teleoperation the final set of the papers were verified. Figure \ref{fig:range of applications} shows the 4 broad categories that appear most.\\
+ 
+ To define the  major categories, I adapted the procedure used in \cite{7912316} and I categorized them into navigation, manipulation, simulation, and virtualization categories.
+ 
+ The first categorie is Navigation, which includes papers used for Localization, geonavigation, geovisualizations of interactive maps, landscape visualizations, to indicate safe navigation and for free view points indication.this are around 43 papers, about 37.4 $\%$ of the papers in the set.\\
+ 
+ The second categorie is manipulation, application such as overlaying information, information about the target and instructions for task execution are categorized together. 48 of the papers, about 41.7 $\%$ of the papers in the set.\\
+ 
+ Papers which use AR for Flight and drive simulation using surrogates, for collision detection before deployment and task planning are categorised in the group Simulation.15 paper , about 13 $\%$ of the papers in the set.\\
+ 
+ The remaining 9 papers, about 7.8$\%$. used for conference and training application are classified as a Virtualization group.
+ 
+ 
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\textwidth]{images/chart.png}
+    \caption{Range of applications where AR is used in teleoperation}
+    \label{fig:range of applications}
+\end{figure}
+
+\subsection{Real-time 3D Reconstruction for Teleoperation}
+
+
+
 
 \section{Report on progress}
 
-Phasellus nisi quam, volutpat non ullamcorper eget, congue fringilla leo. Cras et erat et nibh placerat commodo id ornare est. Nulla facilisi. Aenean pulvinar scelerisque eros eget interdum. Nunc pulvinar magna ut felis varius in hendrerit dolor accumsan. Nunc pellentesque magna quis magna bibendum non laoreet erat tincidunt. Nulla facilisi.
+what are the problems ?
+what is required ?
+what is challenging ?
+what is missing ?
+how you will approach the problem ?
+Marker based AR 
 
-Duis eget massa sem, gravida interdum ipsum. Nulla nunc nisl, hendrerit sit amet commodo vel, varius id tellus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc ac dolor est. Suspendisse ultrices tincidunt metus eget accumsan. Nullam facilisis, justo vitae convallis sollicitudin, eros augue malesuada metus, nec sagittis diam nibh ut sapien. Duis blandit lectus vitae lorem aliquam nec euismod nisi volutpat. Vestibulum ornare dictum tortor, at faucibus justo tempor non. Nulla facilisi. Cras non massa nunc, eget euismod purus. Nunc metus ipsum, euismod a consectetur vel, hendrerit nec nunc.
+Remote  teleoperation  relies  on  communication  networks,  with  limited  bandwidth,  low  frame  rates,  low  resolution,  etc.  These  aspects  result  in  degraded  video  feeds  and  point-clouds,  which  can  leave  out essential visual cues for the operator’s mental models of the remote environment. As noted above, in VR-based teleoperation, the operators rely heavily on the visual cues to understand their location, and their relative range with respect to the task space. 
 
-\section{Report on progress}
+As part of my initial study , I have been designing and experimenting different methods of low latency video streaming , marker based Augmented Reality interface design , implementing 3d Reconstruction for static environment and Point Cloud Streaming from multiple depth sensors.
 
-Phasellus nisi quam, volutpat non ullamcorper eget, congue fringilla leo. Cras et erat et nibh placerat commodo id ornare est. Nulla facilisi. Aenean pulvinar scelerisque eros eget interdum. Nunc pulvinar magna ut felis varius in hendrerit dolor accumsan. Nunc pellentesque magna quis magna bibendum non laoreet erat tincidunt. Nulla facilisi.
+\begin{figure}
+     \includegraphics[width=1\textwidth]{images/GantChart.PNG}
+    \caption{Information processing and related human factors adapted from \cite{PMID:11540969}}
+    \centering
+    \label{Info Processing}
+\end{figure}
 
-Duis eget massa sem, gravida interdum ipsum. Nulla nunc nisl, hendrerit sit amet commodo vel, varius id tellus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc ac dolor est. Suspendisse ultrices tincidunt metus eget accumsan. Nullam facilisis, justo vitae convallis sollicitudin, eros augue malesuada metus, nec sagittis diam nibh ut sapien. Duis blandit lectus vitae lorem aliquam nec euismod nisi volutpat. Vestibulum ornare dictum tortor, at faucibus justo tempor non. Nulla facilisi. Cras non massa nunc, eget euismod purus. Nunc metus ipsum, euismod a consectetur vel, hendrerit nec nunc.
+\textbf{Augmented Reality Interface}
 
-\section{Future targets}
+One way to restore the visual cues is to enhance the VR scene itself by overlaying the objects from the real-world environment with the corresponding virtual 3D meshes in the VR scene. The AR interface, as  described  in  [1],  can  help  the  operator  overcome  the  difficulties  of  perception  by  guiding  the  operator using virtual overlays in their view. Marker-based AR algorithms can be used, based on pre-defined “marker” patterns, to register the overlays in the operator view. In the context of VR-based teleoperation, the marker-based AR interface can enhance the VR scene by registering the 3D meshes of the identified objects in the scene. Figure 19 shows the concept with the real-world scene, the virtual scene,  and  the  3D  meshes  overlaid.  The  example  task  shown  here  is  the  peg  attached  as  the  end-effector of the UR5, to be inserted in the hole located on the wall. The 3D meshes of the peg and the hole are seen in the 
 
-Phasellus nisi quam, volutpat non ullamcorper eget, congue fringilla leo. Cras et erat et nibh placerat commodo id ornare est. Nulla facilisi. Aenean pulvinar scelerisque eros eget interdum. Nunc pulvinar magna ut felis varius in hendrerit dolor accumsan. Nunc pellentesque magna quis magna bibendum non laoreet erat tincidunt. Nulla facilisi.
 
-Duis eget massa sem, gravida interdum ipsum. Nulla nunc nisl, hendrerit sit amet commodo vel, varius id tellus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc ac dolor est. Suspendisse ultrices tincidunt metus eget accumsan. Nullam facilisis, justo vitae convallis sollicitudin, eros augue malesuada metus, nec sagittis diam nibh ut sapien. Duis blandit lectus vitae lorem aliquam nec euismod nisi volutpat. Vestibulum ornare dictum tortor, at faucibus justo tempor non. Nulla facilisi. Cras non massa nunc, eget euismod purus. Nunc metus ipsum, euismod a consectetur vel, hendrerit nec nunc.
 
-\section{Likely outcome}
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=0.5]{images/Aruco_AR.PNG}
+    \caption{Augmented Reality  interface  for  scene enhancement of the remote environment and virtual fixture based guided teleoperation.}
+    \label{fig:Aruco_AR}
+\end{figure}\\
 
-Phasellus nisi quam, volutpat non ullamcorper eget, congue fringilla leo. Cras et erat et nibh placerat commodo id ornare est. Nulla facilisi. Aenean pulvinar scelerisque eros eget interdum. Nunc pulvinar magna ut felis varius in hendrerit dolor accumsan. Nunc pellentesque magna quis magna bibendum non laoreet erat tincidunt. Nulla facilisi.
 
-Duis eget massa sem, gravida interdum ipsum. Nulla nunc nisl, hendrerit sit amet commodo vel, varius id tellus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc ac dolor est. Suspendisse ultrices tincidunt metus eget accumsan. Nullam facilisis, justo vitae convallis sollicitudin, eros augue malesuada metus, nec sagittis diam nibh ut sapien. Duis blandit lectus vitae lorem aliquam nec euismod nisi volutpat. Vestibulum ornare dictum tortor, at faucibus justo tempor non. Nulla facilisi. Cras non massa nunc, eget euismod purus. Nunc metus ipsum, euismod a consectetur vel, hendrerit nec nunc.
+Associating the real-world objects with the 3D meshes is possible by attaching markers to the objects of  interest  in  the  physical  world  and  by  extracting  their  identifier  in  the virtual  world.  A  popular  approach  for  this  is  to  use  square  fiducial  markers  (ArUco  markers),  shown  in  Fig. \ref{fig:Aruco_AR} top right  image.  This  marker is a synthetic square marker composed of a wide black border and an inner binary matrix that forms its identifier. Custom code has been developed that provides acquisition of videos from the cameras as well as camera pose tracking using the ArUco markers. The following stages are involved in the process:
+
+\begin{itemize}
+    \item Based on known objects in the real-world, 3D meshes of the objects are generated, which can be used as overlays within the VR scene. 
+    \item Printed AruCo markers are placed next to the objects in the real-world, in such a way as to be visible in the camera view. Each object gets a unique identifier for the marker.
+    \item The  relative  position,  orientation,  and  the  identifier  of  the  marker  are  calculated  using  the  OpenCV libraries. Based on the extracted identifier, the corresponding 3D mesh is introduced in the virtual scene. 
+\end{itemize}
+
+
+Two different methods have been adopted to assist the operator using the 3D mesh in the VR scene.
+
+\begin{itemize}
+    \item \textbf{Point-cloud  enhancement:}  As  seen  in \ref{fig:Aruco_AR},  the  point-cloud  is  visible  to  the  operator  within the VR scene, allowing depth information when interacting with objects. With this AR interface,  the  3D  meshes  can  be  overlaid  directly  over  the  point-cloud at  the  position  and  orientation  of  the  real-world  object.  This  is  seen  in  Fig. \ref{fig:Aruco_AR} bottom right,  where  the  3D  mesh  is  visible  clearly, in addition to point-cloud. This method allows the operator to see the complete object in  VR,  instead  of  just  the  parts  of  it  coming  from  the  point-cloud.  Additionally,  the  mesh  remains in place even if the point-cloud is turned-off.
+    
+    \item \textbf{Virtual fixture tool:} This is an independent way of visualizing the meshes in the VR scene. It provides a close-up view of the 3D objects of interest, in   this case, the peg and the hole, in a separate space in the VR scene (Fig. \ref{fig:Aruco_AR} bottom left). As a virtual fixture, the tool can be zoomed into or out,  rotated,  and/or  scaled  to  allow  better  understanding  of  the  target  task  and  closer  visualization of the interacting objects. With fluid mapping between the teleoperator and the VR scene, as described above, this eliminates the need of “teleporting”, i.e., moving around in the virtual space.
+    
+\end{itemize}
+
+In either case, the position and orientation of the 3D meshes in the VR scene need to be updated in real-time based on the calculated translation and rotation of the markers in the camera view.
+
+\textit{Challenges}
+\begin{itemize}
+    \item Markers doesn't exist in real-World.
+    \item Pri designed 3D models doesn't represent the actual state of the world.
+    \item limited to a certain number of objects.
+\end{itemize}
+
+
+\textbf{Multiple camera and Point-cloud Streaming}
+
+One of the important requirement of remote teleoperation is to have low latency, high-quality video and point cloud streaming between the MASTER and FIELD robot with low bandwidth consumption. To meet this requirement I have designed multiple cameras and point-cloud streaming algorithms on Jetson Xavier. The Xavier incorporates hardware acceleration (GPU) for encoding various coding standards using its NVIDIA Multi-Standard Video Encoder.
+
+Figure \ref{fig:StreamingPipe} shows A Video and point cloud streaming architecture with detail components pipeline. Point cloud and RGB data, which are acquired from the two Real sense (RS 1 and RS 2) and ZED (ZED 1 and ZED 2) cameras are processed before given to streaming pipeline. Subsequently, a multithreaded algorithm splits it into video and point cloud data and supplies it into the two streaming pipelines simultaneously. 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=0.5]{images/Video_Point_Streaming.PNG}
+    \caption{A Video and point cloud streaming architecture with detail pipeline.}
+    \label{fig:StreamingPipe}
+\end{figure}\\
+
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=0.3]{images/Point_cloud_multipl_1.PNG}
+    \caption{A Video and point cloud display in virtual reality.}
+    \label{fig:StreamingPipe}
+\end{figure}\\
+
+
+The video streaming pipeline uses video transcoding components that involve a three-step process. First, the video file is converted to an uncompressed format. Second, this uncompressed format is then encoded into the target format and finally streamed to the MASTER station. The detail description of each component is listed below:
+\begin{itemize}
+    \item \textbf{Converter:} This component converts from one color space (e.g. RGB) to another one (e.g. YUV). It can also convert between different YUV formats (e.g. I420, NV12, YUY2 …) or RGB format arrangements (e.g. RGBA, ARGB, BGRA…).
+    \item \textbf{Encoder:} This component encodes the raw video coming from the convert element into H264 compressed data, also otherwise known as MPEG-4 AVC (Advanced Video Codec). The element uses a hardware-based encoder (referred to as NVENC) [1] , which provides fully accelerated hardware-based video encoding.
+    \item \textbf{Streamer:} We have implemented a streaming protocol, which uses Real-time Transport Protocol (RTP) to deliver the video over IP networks to the master station. The Stream element uses a gstreamer udpsink that sends UDP packets to the network.  
+
+\end{itemize}
+
+
+Point-cloud streaming pipeline acquires 3D data from ZED and real-sense camera. Which consist of huge point sets describing three-dimensional points associated with additional information such as distance, color, normals, etc. with high rate and occupy a significant amount of memory resources and bandwidth. To transmit this data over rate-limited communication channels, methods for filtering noise and compressing are designed.The detail description of each component is listed below: 
+
+\begin{itemize}
+    \item \textbf{Generate 3D Point clouds:} This component generates takes 3D depth data from the Realsense and ZED camera and generates 3D point-clouds that have similar data type format with Point Cloud Library standard format.
+    \item \textbf{Filter Noise:}This component filters some noise and outliers, which are coming from measurement errors, some frames, present a large number of shadow points. This complicates the estimation of local point cloud 3D features. Some of these outliers can be filtered by performing a statistical analysis on each point's neighborhood, and trimming those, which do not meet a certain criteria.
+    \item \textbf{Compression:} This component exploits the spatial temporal redundancies in point clouds to compress the 3D point cloud. This component uses the PCL Octree based compression codec [2], which is based on the octree data structure and uses an inter-frame XOR-based codec for temporal compression.
+    \item \textbf{Stream:} This component uses the Boost Asio C++ network library and the library is portable and works across most operating systems, and scales well over multiple concurrent connections.
+\end{itemize}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=0.3]{images/wireshark_general.jpg}
+    \caption{packets measured from stream}
+    \label{fig:StreamingPipe}
+\end{figure}\\
+
+\textit{Challenges}
+\begin{itemize}
+    \item Point clouds are very bulky! (573001 points).
+    \item Highly resource intensive.
+    \item Low  data transmission rate.
+    \item Only compresses geometry.
+\end{itemize}
+
+
+\textbf{Real-time 3D reconstruction with Point-cloud Fusion}
+
+The implemented video feedback from monocular and stereoscopic videos in VR headsets allow operators to look in a fixed direction, but these video interfaces do not respond to any head motion such as moving left/right, forward/backward or up/down. Truly immersive Interface, on the other hand, requires ‘freedom of motion’ in six-degrees-of-freedom (‘6-DoF’), so that operators see the correct views of an environment regardless of where he is (3 DoF) and where he is looking (+3 DoF).
+
+I have integrated a 3D reconstruct algorithm, which reconstructs the FIELD environment in real-time and Showing the 3D reconstruction of the environment to the operator in real-time as the remote robot moves through the field. As a result, the operator could navigate the FIELD environment with much better freedom of motion.
+
+
+The algorithm is based on the state of the artwork real-time dense visual SLAM algorithm Elastic Fusion [3]. The system is capable of capturing comprehensive dense globally consistent surfel-based maps of an environment and beyond explored using an RGB-D camera in an incremental online fashion, without pose graph optimization or any post-processing steps. This is accomplished by using dense frame-to model camera tracking and windowed surfel-based fusion coupled with frequent model refinement through non-rigid surface deformations.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=0.5]{images/Elastic_Fusion.PNG}
+    \caption{Real-time 3D reconstruction of static environment for teleoperation.}
+    \label{fig:Elastic}
+\end{figure}\\
+
+
+The algorithm applies local model-to-model surface loop closure optimizations as often as possible to stay close to the mode of the map distribution while utilizing global loop closure to recover from arbitrary drift and maintain global consistency. In the spirit of improving map quality as well as tracking accuracy and robustness, the algorithm furthermore, explore a novel approach to real-time discrete light source detection.
+
+Figure \ref{fig:Elastic} shows 3D reconstructed environment with the corresponding camera and robot position, the stereo camera mounted on the robot end-effector provides the real-time point cloud of the scene and   the algorithm [3] fuses them to generate the full 3D reconstruction of the environment.
+
+\textit{Challenges}
+\begin{itemize}
+    \item Only works for static environment.
+    \item Highly resource intensive..
+    \item Low Quality reconstruction.
+\end{itemize}
+
+\section{Research Plan}
+
+My initial objective for the first year was to study the state-of-the-art to understand the existing literature in perception interfaces related to teleoperation, 3DUI design, 3D reconstruction, etc. I situated my research in the literature review section. 
+
+\subsection*{First Year Research Plan}
+
+I planed to study the literature review based on the following points and to update this list as I discover other relevant areas.
+
+\begin{itemize}
+    \item What are the main factors (constraints) that affect teleoperation interface design (human factors)?
+    \item How to design low-latency streaming of sensory information (3D data, point-clouds, mesh, and video) from the remote environment?
+    \item How to effectively capture 3D information?
+    \item How to convert noisy measurements into high-quality representation?
+    \item How best to utilize Augmented Reality / Real-time 3D reconstruction for assistance in teleoperation?
+    \item How to represent sensor information without causing user discomfort?
+    \item How to maximize the operator performance?
+    \item How to design and analyse user studies following standard psycho-physics methods?
+\end{itemize}
+
+In addition to the literature review, I have planned to contribute to a user study in my first year. The study is led by my lab to understand how users engage in virtually replicated 3D models of environments. This will give me a first experience of how to conduct user studies, to design / use questionnaires, and to understand metrics and statistics of evaluation, etc. For this, I will be working with other researchers, from whom I will gain valuable feedback. To understand the effect of different artifacts, the experiment is being designed to include different levels of 3D model representations by changing the fidelity (resolution / density) of the models being displayed. The results from this experiment will also help me to understand more on how to design efficient algorithms that increase the level of engagement to the user. 
+
+\subsection*{Future Research Plan}
+
+In everyday life, visual scenes typically contain more items than can be processed at one time due to the limited processing capacity of the human visual system. a human mind uses a  “Visual attention” mechanism which refers to the cognitive operations that allow us to efficiently deal with this capacity problem by selecting relevant information and by filtering out irrelevant information. a model based on Visual attention.  
+
+As mentioned in the literature review and the experiments the computational complexity of having a real-time 3D reconstruction of the remote environment, and stream this data to a master station is a serious issue. Moreover, the remote environment scenes are cluttered and contain many different objects which require a complex computational power to process simultaneously. Therefore, a systematic region selection mechanisms are needed to select relevant and irrelevant information to prioritize their computational demand. For instance, In remote teleoperation “Visual attention” mechanisms can be used to select important areas of the visual field \textbf{(for alerting)} and to search a target in cluttered scenes \textbf{(searching)}.
+
+
+In teleoperation, knowledge from the operator, task, sensors and the mission(goal) can be used to select important areas and to search a target in cluttered scenes.
+
+\begin{itemize}
+    \item \textbf{Operator}: Operators navigate and perform a remote task by carefully monitoring the environment using Interfaces such as head-mounted displays.Understanding where the operator's processing priority (Attention) is allocated in the scene can be used to improve the performance. one of the methods to understand the operator's region of interest is by using eye trackers. which offers an important opportunity to examine more directly where attention is deployed, in both navigation and executing the task.
+    \item \textbf{Task:} A task is an activity or part of work which has to be done, knowledge about the task will help us to select a subset of the available information for further processing (improvement).
+    \item \textbf{Sensors:} Sensors are in charge of sensing the different variables or states of the remote system that include both the devices and the environment. when some important information appears sensors can be used to provide/ redirect the attention to the system.
+    \item \textbf{Goal:} navigation to a goal, including from starting locations to the destination can be helpfull to select and improve the enviroment. 
+\end{itemize}
+
+Attention mechanisms can play an important role in addressing the issue of computational complexity in remote teleoperation. I propose to incorporate an attention model into instance detection and 3D object-level mapping for Dynamic 3D reconstruction to prioritize objects.
+
+Figure \ref{fig:Attention} shows a systematic diagram of the proposed model, the attention model will decide the priority of instances based on the knowledge mentioned above and a higher computational power will be given to the instances based on there associated weight.
+doing this the system will have enough computational power to process each important instances with better quality. moreover the attention model will help the communiation delay by only streaming the important and neccesory instances to the master station with out bottlneks. 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=0.55]{images/Dyn_Reco_Attention.PNG}
+    \caption{Real-time 3D reconstruction of dynamic environment using attention models}
+    \label{fig:Attention}
+\end{figure}\\
