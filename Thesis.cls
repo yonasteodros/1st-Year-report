@@ -69,6 +69,8 @@
 \chead{}\lfoot{}\rfoot{}\cfoot{}
 \pagestyle{fancy}
 \renewcommand{\chaptermark}[1]{\btypeout{\thechapter\space #1}\markboth{\@chapapp\ \thechapter\ #1}{\@chapapp\ \thechapter\ #1}}
+\renewcommand{\chaptername}{}
+%\renewcommand{\thechapter}{}
 \renewcommand{\sectionmark}[1]{}
 \renewcommand{\subsectionmark}[1]{}
 \def\cleardoublepage{\clearpage\if@twoside \ifodd\c@page\else
@@ -366,6 +368,7 @@
 \vfil\null
 \cleardoublepage
 }
+
 \renewcommand\backmatter{
   \if@openright
     \cleardoublepage
